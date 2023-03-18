@@ -128,7 +128,7 @@ func main() {
 			case "commit":
 				field := []Field{
 					{
-						Title: "Last Commit: " + envOr(EnvGithubLastCommitMessage, "Commit"),
+						Title: "Last Commit Message: " + envOr(EnvGithubLastCommitMessage, "Commit"),
 						Value: "<" + os.Getenv("GITHUB_SERVER_URL") + "/" + os.Getenv("GITHUB_REPOSITORY") + "/commit/" + os.Getenv("GITHUB_LAST_COMMIT_LONG_SHA") + "|" + os.Getenv("GITHUB_LAST_COMMIT_SHORT_SHA") + ">",
 						Short: true,
 					},
@@ -154,7 +154,7 @@ func main() {
 				Short: true,
 			},
 			{
-				Title: "Last Commit: " + envOr(EnvGithubLastCommitMessage, "Commit"),
+				Title: "Last Commit Message: " + envOr(EnvGithubLastCommitMessage, "Commit"),
 				Value: "<" + os.Getenv("GITHUB_SERVER_URL") + "/" + os.Getenv("GITHUB_REPOSITORY") + "/commit/" + os.Getenv("GITHUB_LAST_COMMIT_LONG_SHA") + "|" + os.Getenv("GITHUB_LAST_COMMIT_SHORT_SHA") + ">",
 				Short: true,
 			},
