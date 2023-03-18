@@ -8,6 +8,7 @@ LABEL "org.opencontainers.image.source"="https://github.com/poper-inc/action-sla
 
 WORKDIR ${GOPATH}/src/github.com/poper-inc/action-slack-notify
 COPY main.go ${GOPATH}/src/github.com/poper-inc/action-slack-notify
+COPY go.mod ${GOPATH}/src/github.com/poper-inc/action-slack-notify
 
 ENV CGO_ENABLED 0
 ENV GOOS linux
