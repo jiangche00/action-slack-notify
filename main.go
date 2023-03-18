@@ -206,7 +206,7 @@ func main() {
 			{
 				Fallback:   envOr(EnvSlackMessage, "GITHUB_ACTION="+os.Getenv("GITHUB_ACTION")+" \n GITHUB_ACTOR="+os.Getenv("GITHUB_ACTOR")+" \n GITHUB_EVENT_NAME="+os.Getenv("GITHUB_EVENT_NAME")+" \n GITHUB_REF="+os.Getenv("GITHUB_REF")+" \n GITHUB_REPOSITORY="+os.Getenv("GITHUB_REPOSITORY")+" \n GITHUB_WORKFLOW="+os.Getenv("GITHUB_WORKFLOW")),
 				Color:      color,
-				AuthorName: envOr(EnvGithubLastCommitAuthor, ""),
+				AuthorName: "Last Commit Author: " + envOr(EnvGithubLastCommitAuthor, ""),
 				AuthorLink: os.Getenv("GITHUB_SERVER_URL") + "/" + os.Getenv(EnvGithubLastCommitAuthor),
 				AuthorIcon: os.Getenv("GITHUB_SERVER_URL") + "/" + os.Getenv(EnvGithubLastCommitAuthor) + ".png?size=32",
 				Footer:     envOr(EnvSlackFooter, "<https://github.com/poper-inc/action-slack-notify|Powered By poper-inc's gitHub actions library>"),
