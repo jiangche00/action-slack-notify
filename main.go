@@ -10,21 +10,24 @@ import (
 )
 
 const (
-	EnvSlackWebhook           = "SLACK_WEBHOOK"
-	EnvSlackIcon              = "SLACK_ICON"
-	EnvSlackIconEmoji         = "SLACK_ICON_EMOJI"
-	EnvSlackChannel           = "SLACK_CHANNEL"
-	EnvSlackTitle             = "SLACK_TITLE"
-	EnvSlackMessage           = "SLACK_MESSAGE"
-	EnvSlackColor             = "SLACK_COLOR"
-	EnvSlackUserName          = "SLACK_USERNAME"
-	EnvSlackFooter            = "SLACK_FOOTER"
-	EnvGithubActor            = "GITHUB_ACTOR"
-	EnvGithubLastCommitAuthor = "GITHUB_LAST_COMMIT_AUTHOR"
-	EnvSiteName               = "SITE_NAME"
-	EnvHostName               = "HOST_NAME"
-	EnvMinimal                = "MSG_MINIMAL"
-	EnvSlackLinkNames         = "SLACK_LINK_NAMES"
+	EnvSlackWebhook             = "SLACK_WEBHOOK"
+	EnvSlackIcon                = "SLACK_ICON"
+	EnvSlackIconEmoji           = "SLACK_ICON_EMOJI"
+	EnvSlackChannel             = "SLACK_CHANNEL"
+	EnvSlackTitle               = "SLACK_TITLE"
+	EnvSlackMessage             = "SLACK_MESSAGE"
+	EnvSlackColor               = "SLACK_COLOR"
+	EnvSlackUserName            = "SLACK_USERNAME"
+	EnvSlackFooter              = "SLACK_FOOTER"
+	EnvGithubActor              = "GITHUB_ACTOR"
+	EnvGithubLastCommitAuthor   = "GITHUB_LAST_COMMIT_AUTHOR"
+	EnvGithubLastCommitMessage  = "GITHUB_LAST_COMMIT_MESSAGE"
+	EnvGithubLastCommitLongSHA  = "GITHUB_LAST_COMMIT_LONG_SHA"
+	EnvGithubLastCommitShortSHA = "GITHUB_LAST_COMMIT_SHORT_SHA"
+	EnvSiteName                 = "SITE_NAME"
+	EnvHostName                 = "HOST_NAME"
+	EnvMinimal                  = "MSG_MINIMAL"
+	EnvSlackLinkNames           = "SLACK_LINK_NAMES"
 )
 
 type Webhook struct {
@@ -70,8 +73,8 @@ func main() {
 		os.Setenv("GITHUB_WORKFLOW", "Link to action run")
 	}
 
-	long_sha := os.Getenv("GITHUB_SHA")
-	commit_sha := long_sha[0:6]
+	// long_sha := os.Getenv("GITHUB_SHA")
+	// commit_sha := long_sha[0:6]
 
 	minimal := os.Getenv(EnvMinimal)
 	fields := []Field{}
@@ -125,8 +128,8 @@ func main() {
 			case "commit":
 				field := []Field{
 					{
-						Title: "Commit",
-						Value: "<" + os.Getenv("GITHUB_SERVER_URL") + "/" + os.Getenv("GITHUB_REPOSITORY") + "/commit/" + os.Getenv("GITHUB_SHA") + "|" + commit_sha + ">",
+						Title: "Last Commit: " + envOr(EnvGithubLastCommitMessage, "Commit"),
+						Value: "<" + os.Getenv("GITHUB_SERVER_URL") + "/" + os.Getenv("GITHUB_REPOSITORY") + "/commit/" + os.Getenv("GITHUB_LAST_COMMIT_LONG_SHA") + "|" + os.Getenv("GITHUB_LAST_COMMIT_SHORT_SHA") + ">",
 						Short: true,
 					},
 				}
@@ -151,8 +154,8 @@ func main() {
 				Short: true,
 			},
 			{
-				Title: "Commit",
-				Value: "<" + os.Getenv("GITHUB_SERVER_URL") + "/" + os.Getenv("GITHUB_REPOSITORY") + "/commit/" + os.Getenv("GITHUB_SHA") + "|" + commit_sha + ">",
+				Title: "Last Commit: " + envOr(EnvGithubLastCommitMessage, "Commit"),
+				Value: "<" + os.Getenv("GITHUB_SERVER_URL") + "/" + os.Getenv("GITHUB_REPOSITORY") + "/commit/" + os.Getenv("GITHUB_LAST_COMMIT_LONG_SHA") + "|" + os.Getenv("GITHUB_LAST_COMMIT_SHORT_SHA") + ">",
 				Short: true,
 			},
 			{
