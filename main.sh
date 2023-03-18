@@ -7,7 +7,7 @@ export CI_SCRIPT_OPTIONS="ci_script_options"
 export SLACK_TITLE=${SLACK_TITLE:-"Message"}
 #export COMMIT_MESSAGE=$(cat "$GITHUB_EVENT_PATH" | jq -r '.head_commit.message')
 export COMMIT_MESSAGE=$(git -C $GITHUB_WORKSPACE show-branch --no-name HEAD)
-export GITHUB_ACTOR=${SLACK_MSG_AUTHOR:-"$GITHUB_ACTOR"}
+export GITHUB_ACTOR=$(git -C $GITHUB_WORKSPACE log -1 --pretty=format:'%an')
 
 hosts_file="$GITHUB_WORKSPACE/.github/hosts.yml"
 
