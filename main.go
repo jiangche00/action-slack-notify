@@ -10,20 +10,21 @@ import (
 )
 
 const (
-	EnvSlackWebhook   = "SLACK_WEBHOOK"
-	EnvSlackIcon      = "SLACK_ICON"
-	EnvSlackIconEmoji = "SLACK_ICON_EMOJI"
-	EnvSlackChannel   = "SLACK_CHANNEL"
-	EnvSlackTitle     = "SLACK_TITLE"
-	EnvSlackMessage   = "SLACK_MESSAGE"
-	EnvSlackColor     = "SLACK_COLOR"
-	EnvSlackUserName  = "SLACK_USERNAME"
-	EnvSlackFooter    = "SLACK_FOOTER"
-	EnvGithubActor    = "GITHUB_ACTOR"
-	EnvSiteName       = "SITE_NAME"
-	EnvHostName       = "HOST_NAME"
-	EnvMinimal        = "MSG_MINIMAL"
-	EnvSlackLinkNames = "SLACK_LINK_NAMES"
+	EnvSlackWebhook           = "SLACK_WEBHOOK"
+	EnvSlackIcon              = "SLACK_ICON"
+	EnvSlackIconEmoji         = "SLACK_ICON_EMOJI"
+	EnvSlackChannel           = "SLACK_CHANNEL"
+	EnvSlackTitle             = "SLACK_TITLE"
+	EnvSlackMessage           = "SLACK_MESSAGE"
+	EnvSlackColor             = "SLACK_COLOR"
+	EnvSlackUserName          = "SLACK_USERNAME"
+	EnvSlackFooter            = "SLACK_FOOTER"
+	EnvGithubActor            = "GITHUB_ACTOR"
+	EnvGithubLastCommitAuthor = "GITHUB_LAST_COMMIT_AUTHOR"
+	EnvSiteName               = "SITE_NAME"
+	EnvHostName               = "HOST_NAME"
+	EnvMinimal                = "MSG_MINIMAL"
+	EnvSlackLinkNames         = "SLACK_LINK_NAMES"
 )
 
 type Webhook struct {
@@ -202,9 +203,9 @@ func main() {
 			{
 				Fallback:   envOr(EnvSlackMessage, "GITHUB_ACTION="+os.Getenv("GITHUB_ACTION")+" \n GITHUB_ACTOR="+os.Getenv("GITHUB_ACTOR")+" \n GITHUB_EVENT_NAME="+os.Getenv("GITHUB_EVENT_NAME")+" \n GITHUB_REF="+os.Getenv("GITHUB_REF")+" \n GITHUB_REPOSITORY="+os.Getenv("GITHUB_REPOSITORY")+" \n GITHUB_WORKFLOW="+os.Getenv("GITHUB_WORKFLOW")),
 				Color:      color,
-				AuthorName: envOr(EnvGithubActor, ""),
-				AuthorLink: os.Getenv("GITHUB_SERVER_URL") + "/" + os.Getenv(EnvGithubActor),
-				AuthorIcon: os.Getenv("GITHUB_SERVER_URL") + "/" + os.Getenv(EnvGithubActor) + ".png?size=32",
+				AuthorName: envOr(EnvGithubLastCommitAuthor, ""),
+				AuthorLink: os.Getenv("GITHUB_SERVER_URL") + "/" + os.Getenv(EnvGithubLastCommitAuthor),
+				AuthorIcon: os.Getenv("GITHUB_SERVER_URL") + "/" + os.Getenv(EnvGithubLastCommitAuthor) + ".png?size=32",
 				Footer:     envOr(EnvSlackFooter, "<https://github.com/poper-inc/action-slack-notify|Powered By poper-inc's gitHub actions library>"),
 				Fields:     fields,
 			},
