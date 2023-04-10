@@ -14,7 +14,7 @@ export TEST_DURATION=$(( $(date +%s) - $START_SECS ))"s"
 export TIME_ZONE=${TIME_ZONE:-"UTC"}
 export TEST_START=$(TZ=$TIME_ZONE date --date @$START_SECS)
 
-echo $SLACK_MESSAGE >> coverage.txt
+echo "$SLACK_MESSAGE" >> coverage.txt
 if [[ $EXITCODE == "0" ]]; then
 	export TEST_SUMMARY=$(grep "^ Summary" -A3 coverage.txt)
 else
