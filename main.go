@@ -67,7 +67,7 @@ func main() {
 		fmt.Fprintln(os.Stderr, "URL is required")
 		os.Exit(1)
 	}
-	text := os.Getenv(EnvTestSummary)
+	text := os.Getenv(EnvSlackMessage)
 	if text == "" {
 		fmt.Fprintln(os.Stderr, "Message is required")
 		os.Exit(1)
