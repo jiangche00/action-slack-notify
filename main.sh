@@ -16,7 +16,7 @@ export TEST_START=$(TZ=$TIME_ZONE date --date @$START_SECS)
 
 echo "$SLACK_MESSAGE" >> coverage.txt
 if [[ $EXITCODE == "0" ]]; then
-	export TEST_SUMMARY=$(grep "^ Summary" -A3 coverage.txt)
+	export TEST_SUMMARY="HELLO"
 else
 	export TEST_SUMMARY=$(grep "^ERROR" -A1 coverage.txt)"\n"$(grep "^ Summary" -A3 coverage.txt)
 fi
