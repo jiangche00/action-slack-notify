@@ -201,7 +201,14 @@ func main() {
 	}
 
 	msg := Webhook{
-		UserName:  os.Getenv(EnvSlackUserName),
+		UserName: os.Getenv(EnvSlackUserName),
+		Text: func() (ret string) {
+			if os.Getenv("EXITCODE") == "0" {
+				return "*comiruAPI php unit-test (Github Action)*\nhi, all tests passed"
+			} else {
+				return "*comiruAPI php unit-test (Github Action)*\nhi, <@" + os.Getenv("SLACK_AT_USERID") + ">" + " something wrong in unit test"
+			}
+		}(),
 		IconURL:   os.Getenv(EnvSlackIcon),
 		IconEmoji: os.Getenv(EnvSlackIconEmoji),
 		Channel:   os.Getenv(EnvSlackChannel),
@@ -213,7 +220,6 @@ func main() {
 				AuthorName: "Last Commit Author: " + envOr(EnvGithubLastCommitAuthor, ""),
 				AuthorLink: os.Getenv("GITHUB_SERVER_URL") + "/" + os.Getenv(EnvGithubLastCommitAuthor),
 				AuthorIcon: os.Getenv("GITHUB_SERVER_URL") + "/" + os.Getenv(EnvGithubLastCommitAuthor) + ".png?size=32",
-				AtSomeone:  "<@" + os.Getenv("SLACK_AT_USERID") + ">",
 				Footer:     envOr(EnvSlackFooter, "<https://github.com/poper-inc/action-slack-notify|Powered By poper-inc's gitHub actions library>"),
 				Fields:     fields,
 			},
